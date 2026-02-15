@@ -31,6 +31,7 @@ function useTheme() {
 
 export default function App() {
   const [page, setPage] = useState("tokenizer");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const modelRef = useRef<ModelState>(createModel());
   const [, forceUpdate] = useState(0);
   const { theme, toggle: toggleTheme } = useTheme();
@@ -41,9 +42,25 @@ export default function App() {
     rerender();
   };
 
+  const handlePageChange = (pageId: string) => {
+    setPage(pageId);
+    setMobileMenuOpen(false); // Close menu on mobile after selecting a page
+  };
+
   return (
-    <div className="app">
-      <div className="sidebar">
+    <div className={`app ${mobileMenuOpen ? "menu-open" : ""}`}>
+      {/* Mobile menu button */}
+      <button 
+        className="mobile-menu-btn" 
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        aria-label="Toggle menu"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M3 12h18M3 6h18M3 18h18" />
+        </svg>
+      </button>
+
+      <div className={`sidebar ${mobileMenuOpen ? "mobile-open" : ""}`}>
         <h1>MicroGPT</h1>
         <div className="subtitle">Visual Explorer &mdash; @karpathy</div>
         <nav>
@@ -51,7 +68,7 @@ export default function App() {
             <button
               key={p.id}
               className={page === p.id ? "active" : ""}
-              onClick={() => setPage(p.id)}
+              onClick={() => handlePageChange(p.id)}
             >
               <span className="num">{p.num}</span>
               <span>{p.label}</span>
@@ -93,6 +110,15 @@ export default function App() {
           </a>.
         </div>
       </div>
+      
+      {/* Mobile overlay - closes menu when tapped */}
+      {mobileMenuOpen && (
+        <div 
+          className="mobile-overlay" 
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
       <div className="main">
         {page === "tokenizer" && <TokenizerPage />}
         {page === "embeddings" && <EmbeddingsPage model={modelRef.current} />}

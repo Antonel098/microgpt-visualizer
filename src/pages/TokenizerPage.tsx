@@ -24,7 +24,7 @@ export default function TokenizerPage() {
           There are <b>{uchars.length}</b> characters (a-z) plus one special <b>BOS</b> token (id={BOS}).
           Total vocabulary size: <b>{vocabSize}</b>.
         </div>
-        <div style={{ display: "flex", flexWrap: "nowrap", gap: 4, paddingTop: 6, overflowX: "auto" }}>
+        <div className="char-mapping-scroll">
           {uchars.map((ch, i) => (
             <div
               key={ch}

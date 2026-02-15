@@ -200,9 +200,191 @@ canvas.chart { width: 100%; height: 220px; border-radius: 6px; background: var(-
 .community-note a { color: var(--blue); text-decoration: none; }
 .community-note a:hover { text-decoration: underline; }
 
-@media (max-width: 800px) {
-  .sidebar { width: 56px; }
-  .sidebar h1, .sidebar .subtitle, .sidebar nav button span:not(.num) { display: none; }
-  .main { margin-left: 56px; padding: 16px; }
+/* Character mapping scroll container */
+.char-mapping-scroll {
+  display: flex; flex-wrap: nowrap; gap: 4px; padding-top: 6px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  /* Prevent content from breaking layout on mobile */
+  max-width: 100%;
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+  display: none; /* Hidden on desktop */
+  position: fixed; top: 16px; left: 16px; z-index: 1000;
+  width: 44px; height: 44px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; cursor: pointer; align-items: center; justify-content: center;
+  color: var(--text); transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.mobile-menu-btn:hover { background: var(--surface2); border-color: var(--blue); }
+.mobile-menu-btn svg { width: 24px; height: 24px; }
+
+/* Hide hamburger when sidebar is open */
+.app.menu-open .mobile-menu-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Mobile overlay */
+.mobile-overlay {
+  display: none; /* Only shown on mobile when menu is open */
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
+  z-index: 15; backdrop-filter: blur(2px);
+}
+
+/* Tablet breakpoint */
+@media (max-width: 900px) {
+  .main { padding: 20px; }
   .panel-row { flex-direction: column; }
+  .page-title { font-size: 20px; }
+  .page-desc { font-size: 12px; }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  /* Show mobile menu button */
+  .mobile-menu-btn { display: flex; }
+  
+  /* Hide sidebar by default on mobile */
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    width: 260px; /* Slightly wider for better touch targets */
+    z-index: 20;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.2);
+  }
+  
+  /* Show sidebar when menu is open */
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  
+  /* Show overlay when menu is open */
+  .sidebar.mobile-open ~ .mobile-overlay {
+    display: block;
+  }
+  
+  /* Adjust main content */
+  .main {
+    margin-left: 0;
+    padding: 70px 16px 16px; /* Extra top padding for menu button */
+    width: 100%;
+  }
+  
+  /* Adjust page title and description */
+  .page-title { font-size: 18px; margin-bottom: 8px; }
+  .page-desc { font-size: 11px; line-height: 1.6; }
+  
+  /* Panels */
+  .panel { padding: 12px; border-radius: 8px; }
+  .panel-title { font-size: 13px; }
+  .explain { font-size: 11px; padding: 8px 10px; }
+  
+  /* Token flow */
+  .token-flow { gap: 3px; }
+  .token-box { min-width: 30px; padding: 3px 6px; }
+  .token-box .char { font-size: 16px; }
+  .token-box .id { font-size: 9px; }
+  
+  /* Buttons */
+  .btn { padding: 6px 14px; font-size: 11px; }
+  
+  /* Controls */
+  .controls { gap: 6px; }
+  .stat { font-size: 11px; padding: 3px 8px; }
+  
+  /* Input fields */
+  input[type="text"] { font-size: 13px; padding: 7px 10px; }
+  
+  /* Heatmap - better mobile scrolling */
+  .heatmap-wrap { 
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -12px;
+    padding: 4px 12px;
+  }
+  table.heatmap { font-size: 9px; }
+  table.heatmap td { width: 28px; height: 22px; font-size: 8px; }
+  table.heatmap .row-label { font-size: 11px; width: 32px; }
+  
+  /* Chart canvas */
+  canvas.chart { height: 180px; }
+  
+  /* Flow steps */
+  .flow { gap: 3px; padding: 6px 0; }
+  .flow-step { min-width: 100px; padding: 8px; font-size: 9px; }
+  .flow-step .label { font-size: 10px; margin-bottom: 4px; }
+  .flow-step .values { font-size: 8px; }
+  .flow-arrow { font-size: 14px; }
+  
+  /* Trace */
+  .trace { font-size: 10px; max-height: 200px; padding: 6px; }
+  
+  /* Vector display */
+  .vector-cell { width: 24px; height: 18px; font-size: 7px; }
+  
+  /* Probability rows */
+  .prob-row { height: 22px; gap: 4px; }
+  .prob-label { width: 32px; font-size: 12px; }
+  .prob-bar-bg { height: 16px; }
+  .prob-val { width: 45px; font-size: 9px; }
+  
+  /* Generated names */
+  .gen-names { gap: 5px; }
+  .gen-name { padding: 4px 10px; font-size: 13px; }
+  
+  /* Sidebar adjustments for mobile */
+  .sidebar h1 { font-size: 16px; padding: 0 20px 4px; }
+  .sidebar .subtitle { font-size: 10px; padding: 0 20px 16px; }
+  .sidebar nav { padding: 8px 0; }
+  .sidebar nav button { padding: 12px 20px; font-size: 13px; }
+  .sidebar nav button .num { width: 24px; height: 24px; font-size: 11px; }
+  
+  .theme-picker { padding: 12px 16px; gap: 6px; }
+  .theme-btn { padding: 8px 4px; font-size: 10px; gap: 4px; }
+  .theme-btn svg { width: 12px; height: 12px; }
+  
+  .guide-link { margin: 12px 16px; padding: 12px 14px; font-size: 12px; }
+  
+  .community-note { font-size: 10px; padding: 16px 20px; }
+}
+
+/* Small mobile phones */
+@media (max-width: 480px) {
+  .mobile-menu-btn { top: 12px; left: 12px; width: 40px; height: 40px; }
+  .mobile-menu-btn svg { width: 20px; height: 20px; }
+  
+  .main { padding: 60px 12px 12px; }
+  
+  .page-title { font-size: 16px; }
+  .page-desc { font-size: 10px; }
+  
+  .panel { padding: 10px; }
+  .panel-title { font-size: 12px; }
+  .explain { font-size: 10px; }
+  
+  .token-box { min-width: 28px; padding: 2px 5px; }
+  .token-box .char { font-size: 14px; }
+  .token-box .id { font-size: 8px; }
+  
+  .btn { padding: 5px 12px; font-size: 10px; }
+  
+  table.heatmap td { width: 24px; height: 20px; font-size: 7px; }
+  table.heatmap .row-label { font-size: 10px; width: 28px; }
+  
+  canvas.chart { height: 150px; }
+  
+  .flow-step { min-width: 90px; padding: 6px; }
+  
+  .vector-cell { width: 20px; height: 16px; font-size: 6px; }
+  
+  .sidebar { width: 240px; }
+  
+  .theme-picker { padding: 10px 12px; gap: 4px; }
+  .theme-btn { padding: 6px 2px; font-size: 9px; gap: 3px; white-space: nowrap; }
+  .theme-btn svg { width: 11px; height: 11px; }
+  
+  .guide-link { margin: 10px 12px; padding: 10px 12px; font-size: 11px; }
+  
+  .community-note { padding: 12px; font-size: 9px; }
 }
