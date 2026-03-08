@@ -29,7 +29,35 @@ function useTheme() {
   return { theme, toggle };
 }
 
+/**
+ * Detects when the page loads after a Google OAuth redirect and cleans up the
+ * URL by removing the temporary OAuth params from the address bar and
+ * reloading, ensuring the app state reflects the completed authentication.
+ */
+function useGoogleOAuthCallbackHandler() {
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const hash = new URLSearchParams(window.location.hash.slice(1));
+
+    const isOAuthCallback =
+      // Authorization-code flow: Google returns `code` (+ optional `state`)
+      params.has("code") ||
+      // Implicit / token flow: Google returns `access_token` in the fragment
+      hash.has("access_token") ||
+      // Error response from Google OAuth
+      params.has("error") ||
+      hash.has("error");
+
+    if (isOAuthCallback) {
+      // Strip the OAuth params from the URL and reload so the page starts fresh.
+      window.location.replace(window.location.pathname);
+    }
+  }, []);
+}
+
 export default function App() {
+  useGoogleOAuthCallbackHandler();
+
   const [page, setPage] = useState("tokenizer");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const modelRef = useRef<ModelState>(createModel());
